@@ -66,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
         String url = "";
         String urlParam = "";
         mWbPage.postUrl(url, EncodingUtils.getBytes(urlParam, "BASE64")); // url:需要访问的ur; urlParam: 参数
+
+        // 7.加载https请求可能会遇到不能成功显示的问题,由于安全机制的原因导致,具体可查看api文档
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
     }
 
     private void setWebViewToken(String url, String tokenStr) {
